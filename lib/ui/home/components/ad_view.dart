@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:kakao_t_ui_exam/model/ad.dart';
 
-class Ad extends StatelessWidget {
-  final String title;
-  final Color color;
+class ADView extends StatelessWidget {
 
-  const Ad({
+  final Ad ad;
+
+  const ADView({
     Key key,
-    this.title,
-    this.color,
+    this.ad,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
       elevation: 8,
-      color: color,
+      color: ad.color,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16.0),
       ),
@@ -29,18 +29,18 @@ class Ad extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      title,
+                      ad.title,
                       style: TextStyle(
                         fontSize: 20,
                         color: Colors.white,
                       ),
                     ),
-                    Text("기왕 늦은 거 편하게 택시타고 가자"),
+                    Text(ad.text),
                   ],
                 ),
               ),
               Image.network(
-                "https://w7.pngwing.com/pngs/390/806/png-transparent-rilakkuma-kakaotalk-kakao-friends-south-korea-kakaofriends-sticker-desktop-wallpaper-snout-thumbnail.png",
+                ad.imageUrl,
                 height: 100,
               ),
             ],

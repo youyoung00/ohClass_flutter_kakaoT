@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kakao_t_ui_exam/ui/home/components/ad.dart';
+import 'package:kakao_t_ui_exam/data/fake_data.dart';
+import 'package:kakao_t_ui_exam/ui/home/components/ad_view.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key key}) : super(key: key);
@@ -20,6 +21,7 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _buildBody() {
+    print('안녕하세요');
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Column(
@@ -165,20 +167,24 @@ class HomeScreen extends StatelessWidget {
             child: PageView(
               scrollDirection: Axis.horizontal,
               controller: controller,
-              children: <Widget>[
-                Ad(
-                  title: '일어나 회사가야지',
-                  color: Colors.red,
-                ),
-                Ad(
-                  title: '제목',
-                  color: Colors.blue,
-                ),
-                Ad(
-                  title: '제목',
-                  color: Colors.yellow,
-                ),
-              ],
+              children: fakeAds.map((e) => ADView(ad: e,)).toList(),
+              // children: <Widget>[
+              //   ADView(
+              //     ad: fakeAds[0]
+              //     // title: '일어나 회사가야지',
+              //     // color: Colors.red,
+              //   ),
+              //   ADView(
+              //     ad: fakeAds[1],
+              //     // title: '제목',
+              //     // color: Colors.blue,
+              //   ),
+              //   ADView(
+              //     ad: fakeAds[2],
+              //     // title: '제목',
+              //     // color: Colors.yellow,
+              //   ),
+              // ],
             ),
           )
         ],
