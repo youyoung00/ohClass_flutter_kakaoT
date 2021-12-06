@@ -24,7 +24,7 @@ class HomeScreen extends StatelessWidget {
     print('안녕하세요');
     return Padding(
       padding: const EdgeInsets.all(20.0),
-      child: Column(
+      child: ListView(
         children: [
          ..._buildMenu(),// 리스트 안에 리스트를 넣을 경우 : 스프레드 연산자 ...
           _buildAds(controller),
@@ -204,11 +204,15 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _buildNotice(){
-    return Expanded(
-      child: ListView(
-        shrinkWrap: true,
-        children: List.generate(50, (index) => Text('공지 ${index}')),
-      ),
+    return ListView(
+      // shrinkWrap: true, // 스크롤이 안되고, 사이즈가 있는 Column 처럼 동작.
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      children: List.generate(50, (index) => ListTile(
+        leading: Icon(Icons.notifications),
+        trailing: Icon(Icons.notifications_outlined),
+        title: Text('공지 $index'),
+      )),
     );
   }
 }
