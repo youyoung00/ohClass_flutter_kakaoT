@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kakao_t_ui_exam/data/fake_data.dart';
+import 'package:kakao_t_ui_exam/model/menu.dart';
 import 'package:kakao_t_ui_exam/ui/home/components/ad_view.dart';
+import 'package:kakao_t_ui_exam/ui/home/components/menu_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key key}) : super(key: key);
@@ -26,11 +28,21 @@ class HomeScreen extends StatelessWidget {
       padding: const EdgeInsets.all(20.0),
       child: ListView(
         children: [
-         ..._buildMenu(),// 리스트 안에 리스트를 넣을 경우 : 스프레드 연산자 ...
+          _buildMenu2(),// 리스트 안에 리스트를 넣을 경우 : 스프레드 연산자 ...
           _buildAds(controller),
           _buildNotice()
         ],
       ),
+    );
+  }
+
+  Widget _buildMenu2(){
+    return GridView.count(
+      childAspectRatio: 2 / 3,
+      crossAxisCount: 4,
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      children: fakeMenus.map((e) => MenuWidget(menu: e,)).toList()
     );
   }
 
@@ -39,23 +51,7 @@ class HomeScreen extends StatelessWidget {
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Column(
-            children: [
-              Image.network(
-                "https://pds.joongang.co.kr/news/component/htmlphoto_mmdata/201702/18/htm_20170218114544126552.jpg",
-                width: 80,
-                height: 80,
-                fit: BoxFit.cover,
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                '택시',
-                style: TextStyle(fontSize: 20),
-              ),
-            ],
-          ),
+          // MenuWidget(),
           Column(
             children: [
               Image.network(
@@ -216,3 +212,5 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
+
