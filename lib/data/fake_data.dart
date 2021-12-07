@@ -5,8 +5,7 @@ import 'package:kakao_t_ui_exam/model/menu.dart';
 final List<Menu> fakeMenus = [
   Menu(
       title: '자전거',
-      imageUrl:
-          'https://cdn.pixabay.com/photo/2021/09/08/15/24/couple-6607143__480.jpg',
+      imageUrl: 'https://cdn.pixabay.com/photo/2021/09/08/15/24/couple-6607143__480.jpg',
       isFavorite: true,
   ),
   Menu(

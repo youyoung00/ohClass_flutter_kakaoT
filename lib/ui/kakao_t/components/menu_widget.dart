@@ -31,7 +31,7 @@ class MenuWidget extends StatelessWidget {
                 color: menu.isFavorite ? Colors.yellow : Colors.black,
               ),
             ),
-            // if (menu.isFavorite) Positioned(
+            // if (menu.isFavorite)Positioned(
             //   right: 0,
             //   bottom: 10,
             //   child: Icon(
