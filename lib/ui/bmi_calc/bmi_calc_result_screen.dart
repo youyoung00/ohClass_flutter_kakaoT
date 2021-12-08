@@ -11,7 +11,17 @@ class BmiCalResultScreen extends StatelessWidget {
         title: const Text("결과"),
       ),
       body: Center(
-        child: Text("결과화면"),
+        child: GestureDetector(
+          onTap: (){
+             Navigator.of(context).pop;
+          },
+          child: Text(
+            "결과화면",
+            style: TextStyle(
+              fontSize: 30,
+            ),
+          ),
+        ),
       ),
     );
   }

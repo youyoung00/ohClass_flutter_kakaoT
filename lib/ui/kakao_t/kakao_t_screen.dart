@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:kakao_t_ui_exam/data/fake_data.dart';
 import 'package:kakao_t_ui_exam/model/menu.dart';
+import 'package:kakao_t_ui_exam/ui/kakao_t/detail_screen.dart';
 import 'components/ad_view.dart';
 import 'components/menu_widget.dart';
 
 class KakaoTScreen extends StatelessWidget {
+
+
   KakaoTScreen({Key key}) : super(key: key);
   final PageController controller = PageController(initialPage: 0);
 
@@ -18,17 +21,17 @@ class KakaoTScreen extends StatelessWidget {
           style: TextStyle(color: Colors.black),
         ),
       ),
-      body: _buildBody(),
+      body: _buildBody(context),
     );
   }
 
-  Widget _buildBody() {
+  Widget _buildBody(BuildContext context) {
     print('안녕하세요');
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: ListView(
         children: [
-          _buildMenu2(),// 리스트 안에 리스트를 넣을 경우 : 스프레드 연산자 ...
+          _buildMenu2(context), // 리스트 안에 리스트를 넣을 경우 : 스프레드 연산자 ...
           _buildAds(controller),
           _buildNotice()
         ],
@@ -36,17 +39,29 @@ class KakaoTScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildMenu2(){
+  Widget _buildMenu2(BuildContext context) {
     return GridView.count(
-      childAspectRatio: 2 / 3,
-      crossAxisCount: 4,
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      children: fakeMenus.map((e) => MenuWidget(menu: e,)).toList()
-    );
+        childAspectRatio: 2 / 3,
+        crossAxisCount: 4,
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        children: fakeMenus
+            .map((menu) => GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => DetailScreen(
+                      title: menu.title,
+                    )),
+                  );
+                },
+                child: MenuWidget(
+                  menu: menu,
+                )))
+            .toList());
   }
 
-  List<Widget> _buildMenu (){
+  List<Widget> _buildMenu() {
     return [
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -173,44 +188,48 @@ class KakaoTScreen extends StatelessWidget {
 
   Widget _buildAds(PageController controller) {
     return SizedBox(
-          height: 150,
-          child: PageView(
-            scrollDirection: Axis.horizontal,
-            controller: controller,
-            children: fakeAds.map((e) => ADView(ad: e,)).toList(),
-            // children: <Widget>[
-            //   ADView(
-            //     ad: fakeAds[0]
-            //     // title: '일어나 회사가야지',
-            //     // color: Colors.red,
-            //   ),
-            //   ADView(
-            //     ad: fakeAds[1],
-            //     // title: '제목',
-            //     // color: Colors.blue,
-            //   ),
-            //   ADView(
-            //     ad: fakeAds[2],
-            //     // title: '제목',
-            //     // color: Colors.yellow,
-            //   ),
-            // ],
-          ),
-        );
+      height: 150,
+      child: PageView(
+        scrollDirection: Axis.horizontal,
+        controller: controller,
+        children: fakeAds
+            .map((e) => ADView(
+                  ad: e,
+                ))
+            .toList(),
+        // children: <Widget>[
+        //   ADView(
+        //     ad: fakeAds[0]
+        //     // title: '일어나 회사가야지',
+        //     // color: Colors.red,
+        //   ),
+        //   ADView(
+        //     ad: fakeAds[1],
+        //     // title: '제목',
+        //     // color: Colors.blue,
+        //   ),
+        //   ADView(
+        //     ad: fakeAds[2],
+        //     // title: '제목',
+        //     // color: Colors.yellow,
+        //   ),
+        // ],
+      ),
+    );
   }
 
-  Widget _buildNotice(){
+  Widget _buildNotice() {
     return ListView(
       // shrinkWrap: true, // 스크롤이 안되고, 사이즈가 있는 Column 처럼 동작.
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
-      children: List.generate(50, (index) => ListTile(
-        leading: Icon(Icons.notifications),
-        trailing: Icon(Icons.notifications_outlined),
-        title: Text('공지 $index'),
-      )),
+      children: List.generate(
+          50,
+          (index) => ListTile(
+                leading: Icon(Icons.notifications),
+                trailing: Icon(Icons.notifications_outlined),
+                title: Text('공지 $index'),
+              )),
     );
   }
 }
-
-
