@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:kakao_t_ui_exam/model/menu.dart';
 
 class DetailScreen extends StatelessWidget {
-  final String title;
-  const DetailScreen({Key key, this.title}) : super(key: key);
+  // final String title;
+  final Menu menu;
+  const DetailScreen({Key key, this.menu}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(menu.title),
       ),
-      body: Container(),
+      body: Center(
+        child: Hero(
+          tag: menu.title,
+            child: Image.network(menu.imageUrl),
+        ),
+      ),
     );
   }
 }
