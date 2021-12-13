@@ -1,11 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class BmiCalResultScreen extends StatelessWidget {
   final double weight;
   final double height;
 
-  BmiCalResultScreen({Key key, @required this.weight, @required this.height}) : super(key: key);
+  BmiCalResultScreen({Key? key, required this.weight, required this.height}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

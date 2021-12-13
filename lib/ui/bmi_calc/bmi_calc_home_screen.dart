@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'bmi_calc_result_screen.dart';
 
 class BmiCalcHomeScreen extends StatefulWidget {
-  BmiCalcHomeScreen({Key key}) : super(key: key);
+  BmiCalcHomeScreen({Key? key}) : super(key: key);
 
   @override
   State<BmiCalcHomeScreen> createState() => _BmiCalcHomeScreenState();
@@ -50,7 +50,7 @@ class _BmiCalcHomeScreenState extends State<BmiCalcHomeScreen> {
                 keyboardType: TextInputType.number,
                 controller: _heightController,
                 validator: (value){
-                  if(value.isEmpty){
+                  if(value?.isEmpty ?? false){
                     return '키를 입력하세요';
                   }
                   return null;
@@ -66,7 +66,7 @@ class _BmiCalcHomeScreenState extends State<BmiCalcHomeScreen> {
                 keyboardType: TextInputType.number,
                 controller: _weightController,
                 validator: (value){
-                  if(value.isEmpty){
+                  if(value!.isEmpty){
                     return '몸무게를 입력하세요';
                   }
                   return null;
@@ -78,7 +78,7 @@ class _BmiCalcHomeScreenState extends State<BmiCalcHomeScreen> {
                 child: ElevatedButton(
                     onPressed: () {
 
-                      if(_formKey.currentState.validate()){
+                      if(_formKey.currentState?.validate() ?? false){
                         Navigator.push(
                           context,
                           MaterialPageRoute(

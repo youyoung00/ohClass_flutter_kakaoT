@@ -1,17 +1,14 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kakao_t_ui_exam/data/fake_data.dart';
 import 'package:kakao_t_ui_exam/model/ad.dart';
-import 'package:kakao_t_ui_exam/model/menu.dart';
 import 'package:kakao_t_ui_exam/ui/kakao_t/detail_screen.dart';
 import 'components/ad_view.dart';
 import 'components/menu_widget.dart';
-import 'package:carousel_slider/carousel_controller.dart';
 
 class KakaoTScreen extends StatefulWidget {
 
-  KakaoTScreen({Key key}) : super(key: key);
+  KakaoTScreen({Key? key}) : super(key: key);
 
   @override
   State<KakaoTScreen> createState() => _KakaoTScreenState();
