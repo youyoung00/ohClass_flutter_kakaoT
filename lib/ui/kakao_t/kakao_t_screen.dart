@@ -1,14 +1,26 @@
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kakao_t_ui_exam/data/fake_data.dart';
+import 'package:kakao_t_ui_exam/model/ad.dart';
 import 'package:kakao_t_ui_exam/model/menu.dart';
 import 'package:kakao_t_ui_exam/ui/kakao_t/detail_screen.dart';
 import 'components/ad_view.dart';
 import 'components/menu_widget.dart';
+import 'package:carousel_slider/carousel_controller.dart';
 
-class KakaoTScreen extends StatelessWidget {
-
+class KakaoTScreen extends StatefulWidget {
 
   KakaoTScreen({Key key}) : super(key: key);
+
+  @override
+  State<KakaoTScreen> createState() => _KakaoTScreenState();
+}
+
+class _KakaoTScreenState extends State<KakaoTScreen> {
+
+  int _index = 0;
+
   final PageController controller = PageController(initialPage: 0);
 
   @override
@@ -187,35 +199,71 @@ class KakaoTScreen extends StatelessWidget {
   }
 
   Widget _buildAds(PageController controller) {
-    return SizedBox(
-      height: 150,
-      child: PageView(
-        scrollDirection: Axis.horizontal,
-        controller: controller,
-        children: fakeAds
-            .map((e) => ADView(
-                  ad: e,
-                ))
-            .toList(),
-        // children: <Widget>[
-        //   ADView(
-        //     ad: fakeAds[0]
-        //     // title: '일어나 회사가야지',
-        //     // color: Colors.red,
-        //   ),
-        //   ADView(
-        //     ad: fakeAds[1],
-        //     // title: '제목',
-        //     // color: Colors.blue,
-        //   ),
-        //   ADView(
-        //     ad: fakeAds[2],
-        //     // title: '제목',
-        //     // color: Colors.yellow,
-        //   ),
-        // ],
-      ),
+    return Stack(
+      alignment: Alignment.bottomCenter,
+      children: [
+        CarouselSlider(
+          options: CarouselOptions(
+            height: 150,
+            viewportFraction: 0.8,
+            enableInfiniteScroll: true,
+            autoPlay: true,
+            autoPlayCurve: Curves.ease,
+            onPageChanged: (index, _){
+              setState(() {
+                _index = index;
+              });
+            }
+          ),
+          items: fakeAds.map((Ad e) => ADView(ad: e,)).toList(),
+
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: fakeAds.asMap().entries.map((e) {
+            return Container(
+              width: 12.0,
+              height: 12.0,
+              margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: e.key == _index ? Colors.black : Colors.grey
+              )
+            );
+          }).toList()
+        )
+      ],
     );
+      // PageView(
+      // scrollDirection: Axis.horizontal,
+      // controller: controller,
+      // children: fakeAds
+      //     .map((e) => ADView(
+      //           ad: e,
+      //         ))
+      //     .toList(),
+
+
+
+
+      // children: <Widget>[
+      //   ADView(
+      //     ad: fakeAds[0]
+      //     // title: '일어나 회사가야지',
+      //     // color: Colors.red,
+      //   ),
+      //   ADView(
+      //     ad: fakeAds[1],
+      //     // title: '제목',
+      //     // color: Colors.blue,
+      //   ),
+      //   ADView(
+      //     ad: fakeAds[2],
+      //     // title: '제목',
+      //     // color: Colors.yellow,
+      //   ),
+      // ],
+
   }
 
   Widget _buildNotice() {
