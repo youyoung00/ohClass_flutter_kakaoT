@@ -26,7 +26,7 @@ class _CounterScreenState extends State<CounterScreen> {
             _count++;
           });
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
 
       ),
     );
@@ -36,7 +36,7 @@ class _CounterScreenState extends State<CounterScreen> {
     return Center(
       child: Text(
         '$_count',
-        style: TextStyle(fontSize: 48),
+        style: const TextStyle(fontSize: 48),
       ),
     );
   }

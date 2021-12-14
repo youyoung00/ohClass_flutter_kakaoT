@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-
 import 'bmi_calc_result_screen.dart';
 
 class BmiCalcHomeScreen extends StatefulWidget {
-  BmiCalcHomeScreen({Key? key}) : super(key: key);
+  const BmiCalcHomeScreen({Key? key}) : super(key: key);
 
   @override
   State<BmiCalcHomeScreen> createState() => _BmiCalcHomeScreenState();
@@ -43,7 +42,7 @@ class _BmiCalcHomeScreenState extends State<BmiCalcHomeScreen> {
           child: Column(
             children: [
               TextFormField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: '키',
                 ),
@@ -57,16 +56,16 @@ class _BmiCalcHomeScreenState extends State<BmiCalcHomeScreen> {
                 },
 
               ),
-              SizedBox(
+              const SizedBox(
                 height: 16.0,
               ),
               TextFormField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     border: OutlineInputBorder(), hintText: '몸무게'),
                 keyboardType: TextInputType.number,
                 controller: _weightController,
                 validator: (value){
-                  if(value!.isEmpty){
+                  if(value?.isEmpty ?? false){
                     return '몸무게를 입력하세요';
                   }
                   return null;
@@ -77,7 +76,6 @@ class _BmiCalcHomeScreenState extends State<BmiCalcHomeScreen> {
                 alignment: Alignment.centerRight,
                 child: ElevatedButton(
                     onPressed: () {
-
                       if(_formKey.currentState?.validate() ?? false){
                         Navigator.push(
                           context,
@@ -89,9 +87,8 @@ class _BmiCalcHomeScreenState extends State<BmiCalcHomeScreen> {
                           ),
                         );
                       }
-
                     },
-                    child: Text('결과')),
+                    child: const Text('결과')),
               ),
             ],
           ),

@@ -52,12 +52,12 @@ class MenuWidget extends StatelessWidget {
             // )
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         Text(
           menu.title,
-          style: TextStyle(fontSize: 14),
+          style: const TextStyle(fontSize: 14),
         ),
       ],
     );
